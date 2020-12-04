@@ -6,7 +6,7 @@ const common = require('../../common')
  * 模拟UA 请求头
  */
 const ua = new UserAgent({platform: 'Win32'});
-const userAgents = Array(200).fill().map(() => ua.toString());
+const userAgents = Array(200).fill().map(() => ua.random());
 
 /**
  * 爬虫对象

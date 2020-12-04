@@ -1,5 +1,6 @@
+const puppeteer = require('puppeteer-core')
 const UserAgent = require('user-agents');
-const common = require('../../common')
+const common = require('../common')
 /**
  * 模拟UA 请求头
  */
@@ -7,27 +8,26 @@ const ua = new UserAgent({platform: 'Win32'});
 
 const IS_LAST_PAGE = '-no-next-page-'
 
-async function getLinks(page) {
-    const links = await page.$$eval('#content_left a', rows => {
-        const _links = []
-        const matcht = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/
-        rows.forEach(row => {
-            const a = $(row)
-            const href = a.text()
-            if (href.indexOf('www.baidu.com') !== -1) return
-            // const matcht = /^(https?:\/\/)?([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)?(\?[0-9a-z&=]+)?(#[0-9-a-z]+)?/g
-            const result = href.match(matcht)
-            // console.log(result)
-            if (!result) return
-            const h = result[0]
-            if (matcht.test(h)) {
-                _links.push(h)
-            }
-        })
-        return _links
-    })
-    return links
+const launchConfig = {
+    headless: false,
+    devtools: false,
+    ignoreDefaultArgs: ['--enable-automation'],
+    executablePath: '/opt/google/chrome/chrome',
+    // executablePath: '/usr/bin/chromium-browser',
+    // executablePath: '/snap/bin/chromium',
+    // executablePath: '/usr/bin/firefox',
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--start-maximized',
+        '--allow-running-insecure-content',
+        '--disable-web-security',
+        '--auto-open-devtools-for-tabs',
+        // `--proxy-server=${newProxyUrl}`,
+        // `--proxy-server=socks5://localhost:1080`
+    ]
 }
+
 
 async function getLinks2(page) {
     await page.waitForTimeout(common.randomNum()) //等待時間
@@ -71,11 +71,11 @@ async function clickNextPage(page) {
     return x
 }
 
-async function search(browser, kw, pageCb, finishCb) {
-    const page = await browser.newPage()
-    // await page.setUserAgent(ua.random().toString())
-    // await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.0 Safari/537.36');
+(async ()=>{
 
+const browser = await puppeteer.launch(launchConfig)
+    const page = await browser.newPage()
+    await page.setUserAgent(ua.random().toString())
     await page.setViewport({
         width: 1280,
         height: 800
@@ -83,7 +83,7 @@ async function search(browser, kw, pageCb, finishCb) {
     await page.setDefaultNavigationTimeout(0)
 
     await page.goto('https://www.baidu.com/')
-    await page.type('#kw', kw) // 所搜关键词
+    await page.type('#kw', '软件') // 所搜关键词
     await page.click('#su') // 百度一下
 
     const links = []
@@ -95,7 +95,6 @@ async function search(browser, kw, pageCb, finishCb) {
         // await page.waitForSelector('#content_left', { timeout: 0 })
         const _links = await getLinks2(page)
         // console.log(_links)
-        pageCb(_links)
         links.push(..._links)
 
         const isLastPage = await clickNextPage(page)
@@ -104,12 +103,9 @@ async function search(browser, kw, pageCb, finishCb) {
         if (IS_LAST_PAGE === isLastPage) { // 最后一页
             isLast = true
             console.log('********************************* last page')
+            console.error(links)
             await page.close()
-            finishCb(links)
-            // console.error(links)
+            await browser.close()
         }
     }
-}
-
-exports = module.exports = {search: search}
-// exports.searchBaidu = searchBaidu
+})()

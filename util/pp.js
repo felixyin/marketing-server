@@ -5,12 +5,13 @@ const launchConfig = {
     headless: false,
     devtools: false,
     ignoreDefaultArgs: ['--enable-automation'],
+    // executablePath: '/usr/bin/chromium-browser',
     args: [
-        // '--no-sandbox',
-        // '--disable-setuid-sandbox',
-        // '--start-maximized',
-        // '--allow-running-insecure-content',
-        // '--disable-web-security',
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--start-maximized',
+        '--allow-running-insecure-content',
+        '--disable-web-security',
         // '--auto-open-devtools-for-tabs',
         // `--proxy-server=${newProxyUrl}`,
         // `--proxy-server=socks5://localhost:1080`
