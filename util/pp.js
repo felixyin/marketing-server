@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 const fs = require('fs')
 
 const launchConfig = {
-    headless: true,
+    headless: false,
     devtools: false,
     ignoreDefaultArgs: ['--enable-automation'],
     args: [

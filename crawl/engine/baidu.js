@@ -36,14 +36,16 @@ async function getLinks2(page) {
         rows.forEach(row => {
             const a = $(row)
             const href = a.text()
-            if (href.indexOf('www.baidu.com') !== -1) return
+            // if (href.indexOf('www.baidu.com') !== -1) return
             // const matcht = /^(https?:\/\/)?([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)?(\?[0-9a-z&=]+)?(#[0-9-a-z]+)?/g
             const result = href.match(matcht)
             // console.log(result)
             if (!result) return
-            const h = result[0]
-            if (matcht.test(h)) {
-                _links.push(h)
+            for (let i = 0; i < result.length; i++) {
+                const h = result[i]
+                if (matcht.test(h)) {
+                    _links.push(h)
+                }
             }
         })
         return _links
@@ -103,5 +105,5 @@ async function search(browser, kw, pageCb, finishCb) {
     }
 }
 
-module.exports = {search: search}
+exports = module.exports = {search: search}
 // exports.searchBaidu = searchBaidu

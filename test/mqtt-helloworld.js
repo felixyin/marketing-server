@@ -1,6 +1,6 @@
 // https://www.npmjs.com/package/mqtt
-var mqtt = require('mqtt')
-var client = mqtt.connect('mqtt://qtrj.i234.me:1883', {
+var mqttHelloworld = require('mqtt')
+var client = mqttHelloworld.connect('mqtt://qtrj.i234.me:1883', {
     // clientId: 'marketing_test1',
     // clean: false,
     // queueQoSZero: false,
