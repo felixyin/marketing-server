@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6172631-3c0e-429a-8318-f61d7e3b96d3" name="Default Changelist" comment="baidu2.js 改写puppeteer为crawler方式（pp方式无法爬取百度）">
-      <change afterPath="$PROJECT_DIR$/test/puppeteer-baidu.js" afterDir="false" />
+    <list default="true" id="b6172631-3c0e-429a-8318-f61d7e3b96d3" name="Default Changelist" comment="baidu 360 爬虫失败&#10;改为爬取bing搜索">
+      <change afterPath="$PROJECT_DIR$/test/bing-search-api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/google-search-api.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/google-search-api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crawl/engine/baidu2.js" beforeDir="false" afterPath="$PROJECT_DIR$/crawl/engine/baidu2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crawl/engine/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/crawl/engine/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crawl/site/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/crawl/site/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/puppeteer-helloworld.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/puppeteer-360.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/wsa.txt" beforeDir="false" afterPath="$PROJECT_DIR$/util/wsa.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -36,6 +35,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -60,11 +60,14 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.mqtt-publish-engine.js">
-    <configuration name="index.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/index.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager" selected="Node.js.google-search-api.js">
+    <configuration name="bing-search-api.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/bing-search-api.js" working-dir="$PROJECT_DIR$/test">
       <method v="2" />
     </configuration>
-    <configuration name="mqtt-helloworld.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/mqtt-helloworld.js" working-dir="$PROJECT_DIR$/test">
+    <configuration name="google-search-api.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/google-search-api.js" working-dir="$PROJECT_DIR$/test">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/index.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="mqtt-publish-engine.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/mqtt-publish-engine.js" working-dir="$PROJECT_DIR$/test">
@@ -73,16 +76,13 @@
     <configuration name="puppeteer-360.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/puppeteer-360.js" working-dir="$PROJECT_DIR$/test">
       <method v="2" />
     </configuration>
-    <configuration name="puppeteer-baidu.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/puppeteer-baidu.js" working-dir="$PROJECT_DIR$/test">
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.google-search-api.js" />
+        <item itemvalue="Node.js.bing-search-api.js" />
         <item itemvalue="Node.js.mqtt-publish-engine.js" />
         <item itemvalue="Node.js.index.js (1)" />
         <item itemvalue="Node.js.puppeteer-360.js" />
-        <item itemvalue="Node.js.puppeteer-baidu.js" />
-        <item itemvalue="Node.js.mqtt-helloworld.js" />
       </list>
     </recent_temporary>
   </component>
@@ -95,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607064839610</updated>
       <workItem from="1607064840668" duration="15724000" />
-      <workItem from="1607146018559" duration="3328000" />
+      <workItem from="1607146018559" duration="9591000" />
     </task>
     <task id="LOCAL-00001" summary="mqtt集成">
       <created>1607071159450</created>
@@ -125,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607146235550</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="baidu 360 爬虫失败&#10;改为爬取bing搜索">
+      <created>1607149381425</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1607149381425</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +156,7 @@
     <MESSAGE value="crawler集成" />
     <MESSAGE value="fuck，百度会判断puppeteer启动的浏览器，自动关闭页面，导致无法爬取" />
     <MESSAGE value="baidu2.js 改写puppeteer为crawler方式（pp方式无法爬取百度）" />
-    <option name="LAST_COMMIT_MESSAGE" value="baidu2.js 改写puppeteer为crawler方式（pp方式无法爬取百度）" />
+    <MESSAGE value="baidu 360 爬虫失败&#10;改为爬取bing搜索" />
+    <option name="LAST_COMMIT_MESSAGE" value="baidu 360 爬虫失败&#10;改为爬取bing搜索" />
   </component>
 </project>
