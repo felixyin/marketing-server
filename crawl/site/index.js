@@ -12,7 +12,7 @@ const userAgents = Array(200).fill().map(() => ua.random());
  * 爬虫对象
  */
 const httpC = new Crawler({
-    maxConnections: 100,
+    maxConnections: 2,
     skipDuplicates: true,
     priority: 1,
     timeout: 15000,

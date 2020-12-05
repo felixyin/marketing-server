@@ -12,7 +12,7 @@ const launchConfig = {
     headless: false,
     devtools: false,
     ignoreDefaultArgs: ['--enable-automation'],
-    executablePath: '/opt/google/chrome/chrome',
+    // executablePath: '/opt/google/chrome/chrome',
     // executablePath: '/usr/bin/chromium-browser',
     // executablePath: '/snap/bin/chromium',
     // executablePath: '/usr/bin/firefox',
